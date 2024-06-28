@@ -1,3 +1,4 @@
+"use client"
 import Tasks from "@/components/todovex/tasks";
 import { Button } from "@/components/ui/button";
 import { api } from "@/convex/_generated/api";
