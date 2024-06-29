@@ -4,7 +4,7 @@ import clsx from "clsx";
 import { Checkbox } from "../ui/checkbox";
 import { Dialog, DialogTrigger } from "../ui/dialog";
 import { Calendar, GitBranch, Tag } from "lucide-react";
-// import moment from "moment";
+import moment from "moment";
 
 function isSubTodo(
   data: Doc<"todos"> | Doc<"subTodos">
@@ -61,9 +61,9 @@ export default function Task({
                     </div>
                     <div className="flex items-center justify-center gap-1">
                       <Calendar className="w-3 h-3 text-primary" />
-                      {/* <p className="text-xs text-primary">
+                      <p className="text-xs text-primary">
                         {moment(dueDate).format("LL")}
-                      </p> */}
+                      </p>
                     </div>
                   </div>
                 )}
