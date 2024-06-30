@@ -1,6 +1,6 @@
 import { Doc } from "@/convex/_generated/dataModel";
 import clsx from "clsx";
-// import AddTaskDialog from "../add-tasks/add-task-dialog";
+import AddTaskDialog from "../add-tasks/add-task-dialog";
 import { Checkbox } from "../ui/checkbox";
 import { Dialog, DialogTrigger } from "../ui/dialog";
 import { Calendar, GitBranch, Tag } from "lucide-react";
@@ -70,7 +70,7 @@ export default function Task({
               </div>
             </DialogTrigger>
           </div>
-          {/* {!isSubTodo(data) && <AddTaskDialog data={data} />} */}
+          {!isSubTodo(data) && <AddTaskDialog data={data} />}
         </div>
       </Dialog>
     </div>
