@@ -2,9 +2,9 @@ import { Id } from "./_generated/dataModel";
 import { query, mutation, action } from "./_generated/server";
 import { v } from "convex/values";
 import { handleUserId } from "./auth";
-// import moment from "moment";
 // import { getEmbeddingsWithAI } from "./openai";
 import { api } from "./_generated/api";
+import moment from "moment";
 
 export const get = query({
   args: {},
@@ -93,28 +93,28 @@ export const getTodosTotalByProjectId = query({
   },
 });
 
-// export const todayTodos = query({
-//   args: {},
-//   handler: async (ctx) => {
-//     const userId = await handleUserId(ctx);
+export const todayTodos = query({
+  args: {},
+  handler: async (ctx) => {
+    const userId = await handleUserId(ctx);
 
-//     if (userId) {
-//       const todayStart = moment().startOf("day");
-//       const todayEnd = moment().endOf("day");
+    if (userId) {
+      const todayStart = moment().startOf("day");
+      const todayEnd = moment().endOf("day");
 
-//       return await ctx.db
-//         .query("todos")
-//         .filter((q) => q.eq(q.field("userId"), userId))
-//         .filter(
-//           (q) =>
-//             q.gte(q.field("dueDate"), todayStart.valueOf()) &&
-//             q.lte(todayEnd.valueOf(), q.field("dueDate"))
-//         )
-//         .collect();
-//     }
-//     return [];
-//   },
-// });
+      return await ctx.db
+        .query("todos")
+        .filter((q) => q.eq(q.field("userId"), userId))
+        .filter(
+          (q) =>
+            q.gte(q.field("dueDate"), todayStart.valueOf()) &&
+            q.lte(todayEnd.valueOf(), q.field("dueDate"))
+        )
+        .collect();
+    }
+    return [];
+  },
+});
 
 export const overdueTodos = query({
   args: {},
