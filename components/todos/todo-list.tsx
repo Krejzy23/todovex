@@ -1,9 +1,6 @@
 "use client";
 import { api } from "@/convex/_generated/api";
 import { useQuery } from "convex/react";
-import { Checkbox } from "../ui/checkbox";
-import Task from "./task";
-import { CircleCheckBig } from "lucide-react";
 import Todos from "./todos";
 import CompletedTodos from "./completed-todos";
 import { AddTaskWrapper } from "../add-tasks/add-task-button";

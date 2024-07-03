@@ -19,8 +19,8 @@ import { useEffect, useState } from "react";
 import { Hash, PlusIcon } from "lucide-react";
 import { Doc } from "@/convex/_generated/dataModel";
 import { Dialog, DialogContent, DialogTrigger } from "../ui/dialog";
-// import AddProjectDialog from "../projects/add-project-dialog";
-// import AddLabelDialog from "../labels/add-label-dialog";
+import AddProjectDialog from "../projects/add-project-dialog";
+import AddLabelDialog from "../labels/add-label-dialog";
 
 interface MyListTitleType {
   [key: string]: string;
@@ -29,7 +29,7 @@ interface MyListTitleType {
 export default function SideBar() {
   const pathname = usePathname();
 
-//   const projectList = useQuery(api.projects.getProjects);
+  const projectList = useQuery(api.projects.getProjects);
 
   const LIST_OF_TITLE_IDS: MyListTitleType = {
     primary: "",
@@ -48,13 +48,13 @@ export default function SideBar() {
       };
     });
   };
-//   useEffect(() => {
-//     if (projectList) {
-//       const projectItems = renderItems(projectList);
-//       const items = [...primaryNavItems, ...projectItems];
-//       setNavItems(items);
-//     }
-//   }, [projectList]);
+  useEffect(() => {
+    if (projectList) {
+      const projectItems = renderItems(projectList);
+      const items = [...primaryNavItems, ...projectItems];
+      setNavItems(items);
+    }
+  }, [projectList]);
 
   return (
     <div className="hidden border-r bg-muted/40 md:block">
@@ -75,9 +75,9 @@ export default function SideBar() {
                   <p className="flex flex-1 text-base">
                     {LIST_OF_TITLE_IDS[id]}
                   </p>
-                  {/* {LIST_OF_TITLE_IDS[id] === "My Projects" && (
+                  {LIST_OF_TITLE_IDS[id] === "My Projects" && (
                     <AddProjectDialog />
-                  )} */}
+                  )}
                 </div>
               )}
               <div className={cn("flex items-center lg:w-full")}>
@@ -113,7 +113,7 @@ export default function SideBar() {
                           aria-label="Add a Label"
                         />
                       </DialogTrigger>
-                      {/* <AddLabelDialog /> */}
+                      <AddLabelDialog />
                     </Dialog>
                   )}
                 </div>
