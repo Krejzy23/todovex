@@ -1,4 +1,4 @@
-import { Calendar, CalendarDays, Grid2X2, Inbox } from "lucide-react";
+import { Calendar, CalendarDays, Grid2X2, Inbox, LinkIcon } from "lucide-react";
 
 export const primaryNavItems = [
   {
@@ -22,6 +22,29 @@ export const primaryNavItems = [
     name: "Filters & Labels",
     link: "/loggedin/filter-labels",
     icon: <Grid2X2 className="w-4 h-4" />,
+  },
+];
+export const secondaryNavItems = [
+  {
+    id: "primary",
+    name: "Portfolio",
+    link: "/loggedin",
+    icon: <LinkIcon className="w-4 h-4" />,
+  },
+  {
+    name: "Blog",
+    link: "/loggedin/today",
+    icon: <LinkIcon className="w-4 h-4" />,
+  },
+  {
+    name: "Recent Projects",
+    link: "/loggedin/upcoming",
+    icon: <LinkIcon className="w-4 h-4" />,
+  },
+  {
+    name: "GitHub repositories",
+    link: "/loggedin/upcoming",
+    icon: <LinkIcon className="w-4 h-4" />,
   },
 ];
 

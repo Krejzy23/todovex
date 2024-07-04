@@ -10,7 +10,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { primaryNavItems } from "@/utils";
+import { primaryNavItems, secondaryNavItems } from "@/utils";
 import Image from "next/image";
 import SearchForm from "./search-form";
 import UserProfile from "./user-profile";
@@ -55,10 +55,18 @@ export default function MobileNav({
           <div className="mt-auto">
             <Card>
               <CardHeader>
-                <CardTitle>Upgrade to Pro</CardTitle>
+                <CardTitle>Visit My</CardTitle>
                 <CardDescription>
-                  Unlock all features and get unlimited access to our support
-                  team.
+                  {secondaryNavItems.map(({ name, icon, link }, idx) => (
+                    <Link
+                      key={idx}
+                      href={link}
+                      className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2  hover:text-foreground"
+                    >
+                      {icon}
+                      {name}
+                    </Link>
+                  ))}
                 </CardDescription>
               </CardHeader>
               <CardContent>

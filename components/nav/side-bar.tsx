@@ -9,7 +9,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { primaryNavItems } from "@/utils";
+import { primaryNavItems, secondaryNavItems } from "@/utils";
 import UserProfile from "./user-profile";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
@@ -48,6 +48,7 @@ export default function SideBar() {
       };
     });
   };
+
   useEffect(() => {
     if (projectList) {
       const projectItems = renderItems(projectList);
@@ -86,7 +87,7 @@ export default function SideBar() {
                     "flex items-center text-left lg:gap-3 rounded-lg py-2 transition-all hover:text-primary justify-between w-full",
                     pathname === link
                       ? "active rounded-lg bg-primary/10 text-primary transition-all hover:text-primary"
-                      : "text-foreground "
+                      : "text-foreground"
                   )}
                 >
                   <Link
@@ -121,21 +122,30 @@ export default function SideBar() {
             </div>
           ))}
         </nav>
-      </div>
-      <div className="mt-auto p-4">
+      <div className="p-4 border-red-500">
         <Card x-chunk="dashboard-02-chunk-0">
           <CardHeader className="p-2 pt-0 md:p-4">
-            <CardTitle>Upgrade to Pro</CardTitle>
+            <CardTitle>Visit My</CardTitle>
             <CardDescription>
-              Unlock all features and get unlimited access to our support team.
+              {secondaryNavItems.map(({ name, icon, link }, idx) => (
+                <Link
+                  key={idx}
+                  href={link}
+                  className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 hover:text-foreground"
+                >
+                  {icon}
+                  {name}
+                </Link>
+              ))}
             </CardDescription>
           </CardHeader>
           <CardContent className="p-2 pt-0 md:p-4 md:pt-0">
             <Button size="sm" className="w-full">
-              Upgrade
+              Contact Me
             </Button>
           </CardContent>
         </Card>
+      </div>
       </div>
     </div>
   );

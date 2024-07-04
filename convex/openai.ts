@@ -5,7 +5,7 @@ import { action } from "./_generated/server";
 import OpenAI from "openai";
 import { Id } from "./_generated/dataModel";
 
-const apiKey = process.env.OPEN_AI_KEY;
+const apiKey = process.env.OPENAI_API_KEY;
 const openai = new OpenAI({ apiKey });
 
 export const suggestMissingItemsWithAi = action({
@@ -121,7 +121,7 @@ export const suggestMissingSubItemsWithAi = action({
     //create the todos
     if (messageContent) {
       const items = JSON.parse(messageContent)?.todos ?? [];
-      const AI_LABEL_ID = "k57exc6xrw3ar5e1nmab4vnbjs6v1m4p";
+      const AI_LABEL_ID = "k57e0na4cagccyd81k4wse420s6w0dzm";
 
       for (let i = 0; i < items.length; i++) {
         const { taskName, description } = items[i];

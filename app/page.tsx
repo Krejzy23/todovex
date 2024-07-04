@@ -2,6 +2,8 @@
 import { signInAction } from "@/actions/auth-action";
 import { Button } from "@/components/ui/button";
 import todovexLogo from "@/public/logo/todovex.svg";
+import taskflowLogo from "@/public/logo/taskflow.png";
+
 import clsx from "clsx";
 import { Loader, StepForward } from "lucide-react";
 import Image from "next/image";
@@ -16,11 +18,11 @@ export default function LoginForm() {
         <div className="max-width flex items-center justify-center lg:justify-between">
           <Link className="flex items-center gap-1" href="/loggedin">
             <Image
-              src={todovexLogo}
+              src={taskflowLogo}
               width="50"
               height="50"
               alt="logo"
-              className="h-16 w-20 md:h-16 md:w-20"
+              className="h-20 w-20 md:h-25 md:w-25"
             />
             <h1 className="text-xl hidden lg:flex font-medium text-gray-950 md:text-3xl">
               TodoVex
