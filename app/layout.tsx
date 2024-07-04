@@ -7,7 +7,7 @@ const defaultFont = Noto_Sans_Georgian({ subsets: ["latin"] });
 
 const ORIGIN_URL =
   process.env.NODE === "production"
-    ? "https://taskflow.ai"
+    ? "https://https://taskflow-murex.vercel.app"
     : "http://localhost:3000";
 
 export const metadata: Metadata = {
