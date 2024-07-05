@@ -81,8 +81,8 @@ export default function MobileNav({
                 {id && (
                   <div
                     className={cn(
-                      "flex items-center mt-6 mb-2",
-                      id === "filters" && "my-0"
+                      "flex items-center mt-2 mb-2",
+                      id === "filters" && "my-1"
                     )}
                   >
                     <p className="flex flex-1 text-base">
@@ -97,7 +97,7 @@ export default function MobileNav({
                   <Link
                     key={idx}
                     href={link}
-                    className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2  hover:text-foreground"
+                    className="mx-[-0.65rem] flex items-center text-sm gap-2 rounded-xl px-3 py-1  hover:text-blue-500"
                   >
                     {icon}
                     {name}
@@ -109,22 +109,22 @@ export default function MobileNav({
             {projectList && projectList.length > 4 && (
               <Link
                 href="/loggedin/projects"
-                className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 hover:text-foreground"
+                className="mx-[-0.65rem] flex items-center text-sm gap-4 px-3 py-2 hover:text-blue-500"
               >
-                Show More...
+                Show all projects...
               </Link>
             )}
           </nav>
           <div className="mt-auto">
             <Card>
               <CardHeader>
-                <CardTitle>Visit My</CardTitle>
+                <CardTitle className="text-md -mt-4">Visit My</CardTitle>
                 <CardDescription>
                   {secondaryNavItems.map(({ name, icon, link }, idx) => (
                     <Link
                       key={idx}
                       href={link}
-                      className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 hover:text-foreground"
+                      className="mx-[-0.65rem] flex items-center gap-2 px-3 hover:text-foreground"
                     >
                       {icon}
                       {name}
