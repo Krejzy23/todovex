@@ -1,3 +1,4 @@
+"use client";
 import { Menu } from "lucide-react";
 import Link from "next/link";
 
@@ -14,8 +15,18 @@ import { primaryNavItems, secondaryNavItems } from "@/utils";
 import Image from "next/image";
 import SearchForm from "./search-form";
 import UserProfile from "./user-profile";
+import taskflowLogo from "@/public/logo/taskflow.png";
+import { useQuery } from "convex/react";
+import { api } from "@/convex/_generated/api";
+import { useEffect, useState } from "react";
+import { Hash } from "lucide-react";
+import { cn } from "@/lib/utils";
+import AddProjectDialog from "../projects/add-project-dialog";
+import { Doc } from "@/convex/_generated/dataModel";
 
-import todovexLogo from "@/public/logo/todovex.svg";
+interface MyListTitleType {
+  [key: string]: string;
+}
 
 export default function MobileNav({
   navTitle = "",
@@ -24,6 +35,34 @@ export default function MobileNav({
   navTitle?: string;
   navLink?: string;
 }) {
+  const projectList = useQuery(api.projects.getProjects);
+
+  const LIST_OF_TITLE_IDS: MyListTitleType = {
+    primary: "",
+    projects: "My Projects",
+  };
+
+  const [navItems, setNavItems] = useState([...primaryNavItems]);
+
+  const renderItems = (projectList: Array<Doc<"projects">>) => {
+    return projectList.slice(0, 4).map(({ _id, name }, idx) => {
+      return {
+        ...(idx === 0 && { id: "projects" }),
+        name,
+        link: `/loggedin/projects/${_id.toString()}`,
+        icon: <Hash className="w-4 h-4" />,
+      };
+    });
+  };
+
+  useEffect(() => {
+    if (projectList) {
+      const projectItems = renderItems(projectList);
+      const items = [...primaryNavItems, ...projectItems];
+      setNavItems(items);
+    }
+  }, [projectList]);
+
   return (
     <header className="flex h-14 items-center gap-4 border-b bg-muted/40 px-4 lg:h-[60px] lg:px-6">
       <Sheet>
@@ -37,20 +76,44 @@ export default function MobileNav({
           <nav className="grid gap-2 text-lg font-medium">
             <UserProfile />
 
-            {primaryNavItems.map(({ name, icon, link }, idx) => (
-              <Link
-                key={idx}
-                href={link}
-                className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2  hover:text-foreground"
-              >
-                {icon}
-                {name}
-              </Link>
+            {navItems.map(({ name, icon, link, id }, idx) => (
+              <div key={idx}>
+                {id && (
+                  <div
+                    className={cn(
+                      "flex items-center mt-6 mb-2",
+                      id === "filters" && "my-0"
+                    )}
+                  >
+                    <p className="flex flex-1 text-base">
+                      {LIST_OF_TITLE_IDS[id]}
+                    </p>
+                    {LIST_OF_TITLE_IDS[id] === "My Projects" && (
+                      <AddProjectDialog />
+                    )}
+                  </div>
+                )}
+                <div className={cn("flex items-center lg:w-full")}>
+                  <Link
+                    key={idx}
+                    href={link}
+                    className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2  hover:text-foreground"
+                  >
+                    {icon}
+                    {name}
+                  </Link>
+                </div>
+              </div>
             ))}
 
-            <div className="flex items-center mt-6 mb-2">
-              <p className="flex flex-1 text-base">My Projects</p>
-            </div>
+            {projectList && projectList.length > 4 && (
+              <Link
+                href="/loggedin/projects"
+                className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 hover:text-foreground"
+              >
+                Show More...
+              </Link>
+            )}
           </nav>
           <div className="mt-auto">
             <Card>
@@ -61,7 +124,7 @@ export default function MobileNav({
                     <Link
                       key={idx}
                       href={link}
-                      className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2  hover:text-foreground"
+                      className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 hover:text-foreground"
                     >
                       {icon}
                       {name}
@@ -71,7 +134,7 @@ export default function MobileNav({
               </CardHeader>
               <CardContent>
                 <Button size="sm" className="w-full">
-                  Upgrade
+                  Contact Me
                 </Button>
               </CardContent>
             </Card>
@@ -89,8 +152,9 @@ export default function MobileNav({
         <div className="place-content-center w-full flex-1">
           <SearchForm />
         </div>
-        <div className="place-content-center w-12 h-12 lg:w-16 lg:h-20">
-          <Image alt="logo" src={todovexLogo} />
+        <div className="flex flex-row items-center justify-center ">
+          <Image alt="logo" src={taskflowLogo} width={48} height={48} className="lg:w-20 lg:h-20"/>
+          <p className="font-bold">TaskFlow</p>
         </div>
       </div>
     </header>

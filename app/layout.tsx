@@ -11,7 +11,7 @@ const ORIGIN_URL =
     : "http://localhost:3000";
 
 export const metadata: Metadata = {
-  title: "TaskFlow.ai",
+  title: "TaskFlow",
   description:
     "TaskFlow seamlessly organizes your tasks and predicts what's nextusing AI.",
   icons: {

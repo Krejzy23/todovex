@@ -25,7 +25,7 @@ export default function LoginForm() {
               className="h-20 w-20 md:h-25 md:w-25"
             />
             <h1 className="text-xl hidden lg:flex font-medium text-gray-950 md:text-3xl">
-              TodoVex
+              TaskFlow
             </h1>
           </Link>
           <div className="hidden lg:flex w-fit items-center">
@@ -63,7 +63,7 @@ export default function LoginForm() {
               Todoist Clone
             </h1>
             <h2 className="mt-8 text-center text-xl font-light tracking-tight lg:text-3xl">
-              TodoVex seamlessly{" "}
+              TaskFlow seamlessly{" "}
               <span className="font-bold px-1">organizes your tasks</span> and
               <br className="hidden lg:inline-block" />
               <span className="font-bold px-1">predicts what&apos;s next</span>
@@ -96,7 +96,7 @@ export default function LoginForm() {
             src={"/mobile.png"}
           />
           <Image
-            src="/desktop.png"
+            src={"/desktop.png"}
             alt="laptop"
             loading="lazy"
             width="1000"
