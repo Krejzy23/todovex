@@ -21,7 +21,7 @@ export default function AddProjectDialog() {
   return (
     <Dialog>
       <DialogTrigger id="closeDialog">
-        <PlusIcon className="h-5 w-5" aria-label="Add a Project" />
+        <PlusIcon className="h-5 w-5 hover:text-blue-500" aria-label="Add a Project" />
       </DialogTrigger>
       <AddProjectDialogContent />
     </Dialog>

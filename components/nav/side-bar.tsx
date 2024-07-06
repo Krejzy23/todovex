@@ -18,7 +18,7 @@ import { useQuery } from "convex/react";
 import { useEffect, useState } from "react";
 import { Hash, PlusIcon } from "lucide-react";
 import { Doc } from "@/convex/_generated/dataModel";
-import { Dialog, DialogContent, DialogTrigger } from "../ui/dialog";
+import { Dialog, DialogTrigger } from "../ui/dialog";
 import AddProjectDialog from "../projects/add-project-dialog";
 import AddLabelDialog from "../labels/add-label-dialog";
 

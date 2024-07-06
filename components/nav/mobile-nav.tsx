@@ -153,7 +153,13 @@ export default function MobileNav({
           <SearchForm />
         </div>
         <div className="flex flex-row items-center justify-center ">
-          <Image alt="logo" src={taskflowLogo} width={48} height={48} className="lg:w-20 lg:h-20"/>
+          <Image
+            alt="logo"
+            src={taskflowLogo}
+            width={48}
+            height={48}
+            className="lg:w-20 lg:h-20"
+          />
           <p className="font-bold">TaskFlow</p>
         </div>
       </div>

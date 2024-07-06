@@ -66,7 +66,7 @@ export default function AddTaskInline({
     parentTask?.labelId || ("k57e0na4cagccyd81k4wse420s6w0dzm" as Id<"labels">);
   const priority = parentTask?.priority?.toString() || "1";
   const parentId = parentTask?._id;
-  
+
   const { toast } = useToast();
   const projects = useQuery(api.projects.getProjects) ?? [];
   const labels = useQuery(api.labels.getLabels) ?? [];
@@ -266,7 +266,6 @@ export default function AddTaskInline({
                       ))}
                     </SelectContent>
                   </Select>
-
                   <FormMessage />
                 </FormItem>
               )}
