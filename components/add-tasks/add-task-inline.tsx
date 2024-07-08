@@ -63,7 +63,7 @@ export default function AddTaskInline({
     (GET_STARTED_PROJECT_ID as Id<"projects">);
 
   const labelId =
-    parentTask?.labelId || ("k57e0na4cagccyd81k4wse420s6w0dzm" as Id<"labels">);
+    parentTask?.labelId || ("k5738k5z3b9mxes2jf63agch6n6wdv0r" as Id<"labels">);
   const priority = parentTask?.priority?.toString() || "1";
   const parentId = parentTask?._id;
 

@@ -48,4 +48,4 @@ export const secondaryNavItems = [
   },
 ];
 
-export const GET_STARTED_PROJECT_ID = "k97fs8npdxzkr39y5vjcp9kq1d6tycm1";
+export const GET_STARTED_PROJECT_ID = "k978mpksp6qf1s4v8mmpy4hx116wcpqx";
