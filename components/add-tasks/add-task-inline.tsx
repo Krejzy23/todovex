@@ -16,7 +16,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { toast, useToast } from "@/components/ui/use-toast";
-import { CalendarIcon, Inbox, Text } from "lucide-react";
+import { CalendarIcon, Inbox, Tag, Text } from "lucide-react";
 import { Textarea } from "../ui/textarea";
 import { CardFooter } from "../ui/card";
 import { Dispatch, SetStateAction } from "react";
@@ -134,6 +134,7 @@ export default function AddTaskInline({
       }
     }
   }
+  
   return (
     <div>
       <Form {...form}>
@@ -254,6 +255,7 @@ export default function AddTaskInline({
                   >
                     <FormControl>
                       <SelectTrigger>
+                        <Tag className="h-4 w-4 mr-2 opacity-50"/>
                         <SelectValue placeholder="Select a Label" />
                       </SelectTrigger>
                     </FormControl>
