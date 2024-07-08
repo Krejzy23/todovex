@@ -59,7 +59,8 @@ export const createALabel = mutation({
         // Check if the label already exists
         const existingLabel = await ctx.db
           .query("labels")
-          .filter((q) => q.eq(q.field("name"), name).and(q.eq(q.field("userId"), userId)))
+          .filter((q) => q.eq(q.field("name"), name))
+          .filter((q) => q.eq(q.field("userId"), userId))
           .first();
         
         if (existingLabel) {
