@@ -14,7 +14,17 @@ export const getLabels = query({
 
       const systemLabels = await ctx.db.query("labels").collect();
 
-      return [...systemLabels, ...userLabels];
+      // Remove duplicates without using Map
+      const uniqueLabels = [];
+      const seenIds = new Set();
+      for (const label of [...systemLabels, ...userLabels]) {
+        if (!seenIds.has(label._id)) {
+          uniqueLabels.push(label);
+          seenIds.add(label._id);
+        }
+      }
+
+      return uniqueLabels;
     }
     return [];
   },
@@ -46,12 +56,22 @@ export const createALabel = mutation({
     try {
       const userId = await handleUserId(ctx);
       if (userId) {
-        const newTaskId = await ctx.db.insert("labels", {
+        // Check if the label already exists
+        const existingLabel = await ctx.db
+          .query("labels")
+          .filter((q) => q.eq(q.field("name"), name).and(q.eq(q.field("userId"), userId)))
+          .first();
+        
+        if (existingLabel) {
+          throw new Error("Label already exists");
+        }
+
+        const newLabelId = await ctx.db.insert("labels", {
           userId,
           name,
           type: "user",
         });
-        return newTaskId;
+        return newLabelId;
       }
 
       return null;

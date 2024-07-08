@@ -110,7 +110,7 @@ export default function AddTaskInline({
 
         if (mutationId !== undefined) {
           toast({
-            title: "🦄 Created a task!",
+            title: "Created a task! 👍",
             duration: 3000,
           });
           form.reset({ ...defaultValues });
@@ -127,7 +127,7 @@ export default function AddTaskInline({
 
         if (mutationId !== undefined) {
           toast({
-            title: "🦄 Created a task!",
+            title: "👍 Created a task!",
             duration: 3000,
           });
           form.reset({ ...defaultValues });

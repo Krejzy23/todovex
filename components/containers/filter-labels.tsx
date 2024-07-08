@@ -28,7 +28,7 @@ export default function LabelList() {
               <Tag className="text-primary w-5" />
               <Label
                 htmlFor="labels"
-                className="text-base font-normal hover:cursor-pointer"
+                className="text-base font-normal"
               >
                 {label.name}
               </Label>
