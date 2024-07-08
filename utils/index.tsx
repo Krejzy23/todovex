@@ -49,3 +49,4 @@ export const secondaryNavItems = [
 ];
 
 export const GET_STARTED_PROJECT_ID = "k978mpksp6qf1s4v8mmpy4hx116wcpqx";
+export const GET_STARTED_LABEL_ID = "k5738k5z3b9mxes2jf63agch6n6wdv0r";

@@ -16,7 +16,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { toast, useToast } from "@/components/ui/use-toast";
-import { CalendarIcon, Text } from "lucide-react";
+import { CalendarIcon, Inbox, Text } from "lucide-react";
 import { Textarea } from "../ui/textarea";
 import { CardFooter } from "../ui/card";
 import { Dispatch, SetStateAction } from "react";
@@ -35,7 +35,7 @@ import {
 import { Doc, Id } from "@/convex/_generated/dataModel";
 import { useAction, useMutation, useQuery } from "convex/react";
 import { api } from "@/convex/_generated/api";
-import { GET_STARTED_PROJECT_ID } from "@/utils";
+import { GET_STARTED_PROJECT_ID, GET_STARTED_LABEL_ID } from "@/utils";
 
 const FormSchema = z.object({
   taskName: z.string().min(2, {
@@ -62,8 +62,7 @@ export default function AddTaskInline({
     parentTask?.projectId ||
     (GET_STARTED_PROJECT_ID as Id<"projects">);
 
-  const labelId =
-    parentTask?.labelId || ("k5738k5z3b9mxes2jf63agch6n6wdv0r" as Id<"labels">);
+  const labelId = parentTask?.labelId || (GET_STARTED_LABEL_ID as Id<"labels">);
   const priority = parentTask?.priority?.toString() || "1";
   const parentId = parentTask?._id;
 
@@ -171,7 +170,7 @@ export default function AddTaskInline({
                     <Textarea
                       id="description"
                       placeholder="Description"
-                      className="resize-none"
+                      className="resize-none border-none"
                       {...field}
                     />
                   </div>
@@ -271,35 +270,40 @@ export default function AddTaskInline({
               )}
             />
           </div>
-          <FormField
-            control={form.control}
-            name="projectId"
-            render={({ field }) => (
-              <FormItem>
-                <Select
-                  onValueChange={field.onChange}
-                  defaultValue={projectId || field.value}
-                >
-                  <FormControl>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select a Project" />
-                    </SelectTrigger>
-                  </FormControl>
-                  <SelectContent>
-                    {projects.map((project: Doc<"projects">, idx: number) => (
-                      <SelectItem key={idx} value={project._id}>
-                        {project?.name}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <CardFooter className="flex flex-col lg:flex-row lg:justify-between gap-2 border-t-2 pt-3">
-            <div className="w-full lg:w-1/4"></div>
+          <CardFooter className="flex flex-col lg:flex-row lg:justify-between items-center gap-2 border-t-2 pt-3">
+            <div className="w-full lg:w-1/4">
+              <FormField
+                control={form.control}
+                name="projectId"
+                render={({ field }) => (
+                  <FormItem>
+                    <Select
+                      onValueChange={field.onChange}
+                      defaultValue={projectId || field.value}
+                    >
+                      <FormControl>
+                        <SelectTrigger>
+                          <Inbox 
+                            className="h-4 w-4 opacity-50"
+                          />
+                          <SelectValue placeholder="Select a Project" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        {projects.map(
+                          (project: Doc<"projects">, idx: number) => (
+                            <SelectItem key={idx} value={project._id}>
+                              {project?.name}
+                            </SelectItem>
+                          )
+                        )}
+                      </SelectContent>
+                    </Select>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
             <div className="flex gap-3 self-end">
               <Button
                 className="bg-gray-300/40 text-gray-950 px-6 hover:bg-gray-300"
