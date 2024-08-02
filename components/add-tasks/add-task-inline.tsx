@@ -8,7 +8,6 @@ import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -33,7 +32,7 @@ import {
   SelectValue,
 } from "../ui/select";
 import { Doc, Id } from "@/convex/_generated/dataModel";
-import { useAction, useMutation, useQuery } from "convex/react";
+import { useAction, useQuery } from "convex/react";
 import { api } from "@/convex/_generated/api";
 import { GET_STARTED_PROJECT_ID, GET_STARTED_LABEL_ID } from "@/utils";
 
@@ -94,47 +93,59 @@ export default function AddTaskInline({
     const { taskName, description, priority, dueDate, projectId, labelId } =
       data;
 
-    if (projectId) {
-      if (parentId) {
-        //subtodo
-        const mutationId = createASubTodoEmbeddings({
-          parentId,
-          taskName,
-          description,
-          priority: parseInt(priority),
-          dueDate: moment(dueDate).valueOf(),
-          projectId: projectId as Id<"projects">,
-          labelId: labelId as Id<"labels">,
-        });
-
-        if (mutationId !== undefined) {
-          toast({
-            title: "Created a task! 👍",
-            duration: 3000,
+    try {
+      if (projectId) {
+        if (parentId) {
+          //subtodo
+          const mutationId = await createASubTodoEmbeddings({
+            parentId,
+            taskName,
+            description,
+            priority: parseInt(priority),
+            dueDate: moment(dueDate).valueOf(),
+            projectId: projectId as Id<"projects">,
+            labelId: labelId as Id<"labels">,
           });
-          form.reset({ ...defaultValues });
-        }
-      } else {
-        const mutationId = createTodoEmbeddings({
-          taskName,
-          description,
-          priority: parseInt(priority),
-          dueDate: moment(dueDate).valueOf(),
-          projectId: projectId as Id<"projects">,
-          labelId: labelId as Id<"labels">,
-        });
 
-        if (mutationId !== undefined) {
-          toast({
-            title: "👍 Created a task!",
-            duration: 3000,
+          if (mutationId !== undefined) {
+            toast({
+              title: "Created a sub-task! 👍",
+              duration: 3000,
+            });
+            setShowAddTask(false); // Close the dialog
+            form.reset({ ...defaultValues });
+          }
+        } else {
+          const mutationId = await createTodoEmbeddings({
+            taskName,
+            description,
+            priority: parseInt(priority),
+            dueDate: moment(dueDate).valueOf(),
+            projectId: projectId as Id<"projects">,
+            labelId: labelId as Id<"labels">,
           });
-          form.reset({ ...defaultValues });
+
+          if (mutationId !== undefined) {
+            toast({
+              title: "👍 Created a task!",
+              duration: 3000,
+            });
+            setShowAddTask(false); // Close the dialog
+            form.reset({ ...defaultValues });
+          }
         }
       }
+    } catch (error) {
+      const err = error as Error;
+      console.error("Error creating task:", err);
+      toast({
+        title: "Error creating task",
+        description: err.message,
+        duration: 3000,
+      });
     }
   }
-  
+
   return (
     <div>
       <Form {...form}>

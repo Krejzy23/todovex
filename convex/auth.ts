@@ -17,7 +17,7 @@ export async function handleUserId(ctx: { auth: Auth }) {
   if (viewerId === null) {
     console.error("user is not authenticated");
   } else {
-    console.log("user is authenticated, viewerId:", viewerId);
+  
   }
 
   return viewerId;
